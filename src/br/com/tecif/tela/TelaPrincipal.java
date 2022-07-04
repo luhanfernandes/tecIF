@@ -4,6 +4,10 @@
  */
 package br.com.tecif.tela;
 
+import java.text.DateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Luhan
@@ -26,22 +30,188 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        desktop = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
+        lblUsuario = new javax.swing.JLabel();
+        lblData = new javax.swing.JLabel();
+        MenuPrincipal = new javax.swing.JMenuBar();
+        MenuCadastrar = new javax.swing.JMenu();
+        MenuCadastarCliente = new javax.swing.JMenuItem();
+        MenuCadastrarOS = new javax.swing.JMenuItem();
+        MenuCadastrarUsuario = new javax.swing.JMenuItem();
+        MenuRelatorio = new javax.swing.JMenu();
+        MenuRelatorioServiço = new javax.swing.JMenuItem();
+        MenuAjuda = new javax.swing.JMenu();
+        MenuAjudaSobre = new javax.swing.JMenuItem();
+        MenuOpções = new javax.swing.JMenu();
+        MenuOpçõesSair = new javax.swing.JMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("TecIF");
+        setBackground(new java.awt.Color(0, 153, 0));
+        setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
+
+        desktop.setBackground(new java.awt.Color(0, 0, 0));
+        desktop.setPreferredSize(new java.awt.Dimension(520, 380));
+
+        javax.swing.GroupLayout desktopLayout = new javax.swing.GroupLayout(desktop);
+        desktop.setLayout(desktopLayout);
+        desktopLayout.setHorizontalGroup(
+            desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 520, Short.MAX_VALUE)
+        );
+        desktopLayout.setVerticalGroup(
+            desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 380, Short.MAX_VALUE)
+        );
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/tecif/icon/ifpeIcon.png"))); // NOI18N
+
+        lblUsuario.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblUsuario.setText("Usuário");
+
+        lblData.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        lblData.setText("Data");
+
+        MenuCadastrar.setText("Cadastrar");
+
+        MenuCadastarCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        MenuCadastarCliente.setText("Cliente");
+        MenuCadastarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuCadastarClienteActionPerformed(evt);
+            }
+        });
+        MenuCadastrar.add(MenuCadastarCliente);
+
+        MenuCadastrarOS.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        MenuCadastrarOS.setText("OrdemServiço");
+        MenuCadastrar.add(MenuCadastrarOS);
+
+        MenuCadastrarUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        MenuCadastrarUsuario.setText("Usuário");
+        MenuCadastrarUsuario.setEnabled(false);
+        MenuCadastrarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuCadastrarUsuarioActionPerformed(evt);
+            }
+        });
+        MenuCadastrar.add(MenuCadastrarUsuario);
+
+        MenuPrincipal.add(MenuCadastrar);
+
+        MenuRelatorio.setText("Relatório");
+        MenuRelatorio.setEnabled(false);
+
+        MenuRelatorioServiço.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        MenuRelatorioServiço.setText("Serviço");
+        MenuRelatorio.add(MenuRelatorioServiço);
+
+        MenuPrincipal.add(MenuRelatorio);
+
+        MenuAjuda.setText("Ajuda");
+
+        MenuAjudaSobre.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        MenuAjudaSobre.setText("Sobre");
+        MenuAjudaSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuAjudaSobreActionPerformed(evt);
+            }
+        });
+        MenuAjuda.add(MenuAjudaSobre);
+
+        MenuPrincipal.add(MenuAjuda);
+
+        MenuOpções.setText("Opções");
+        MenuOpções.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuOpçõesActionPerformed(evt);
+            }
+        });
+
+        MenuOpçõesSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        MenuOpçõesSair.setText("Sair");
+        MenuOpçõesSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuOpçõesSairActionPerformed(evt);
+            }
+        });
+        MenuOpções.add(MenuOpçõesSair);
+
+        MenuPrincipal.add(MenuOpções);
+
+        setJMenuBar(MenuPrincipal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(desktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblUsuario, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblData, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 320, Short.MAX_VALUE)
+            .addComponent(desktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel1)
+                .addGap(38, 38, 38)
+                .addComponent(lblUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblData)
+                .addContainerGap())
         );
 
-        pack();
+        setSize(new java.awt.Dimension(635, 408));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void MenuCadastarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCadastarClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuCadastarClienteActionPerformed
+
+    private void MenuAjudaSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuAjudaSobreActionPerformed
+        // TODO add your handling code here:
+        TelaSobre sobre = new TelaSobre();
+        sobre.setVisible(true);
+    }//GEN-LAST:event_MenuAjudaSobreActionPerformed
+
+    private void MenuCadastrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCadastrarUsuarioActionPerformed
+        // TODO add your handling code here:
+        TelaUsuario usuario = new TelaUsuario();
+        usuario.setVisible(true);
+        desktop.add(usuario);
+    }//GEN-LAST:event_MenuCadastrarUsuarioActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+        Date data = new Date();
+        DateFormat formatador = DateFormat.getDateInstance(DateFormat.SHORT);
+        lblData.setText(formatador.format(data));
+    }//GEN-LAST:event_formWindowActivated
+
+    private void MenuOpçõesSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuOpçõesSairActionPerformed
+        // TODO add your handling code here:
+        int sair = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja encerrar a aplicação?","TecIF",JOptionPane.YES_NO_OPTION);
+        if (sair == JOptionPane.YES_OPTION){
+            System.exit(0);
+        }
+    }//GEN-LAST:event_MenuOpçõesSairActionPerformed
+
+    private void MenuOpçõesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuOpçõesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuOpçõesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +249,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu MenuAjuda;
+    private javax.swing.JMenuItem MenuAjudaSobre;
+    private javax.swing.JMenuItem MenuCadastarCliente;
+    private javax.swing.JMenu MenuCadastrar;
+    private javax.swing.JMenuItem MenuCadastrarOS;
+    public static javax.swing.JMenuItem MenuCadastrarUsuario;
+    private javax.swing.JMenu MenuOpções;
+    private javax.swing.JMenuItem MenuOpçõesSair;
+    private javax.swing.JMenuBar MenuPrincipal;
+    public static javax.swing.JMenu MenuRelatorio;
+    private javax.swing.JMenuItem MenuRelatorioServiço;
+    private javax.swing.JDesktopPane desktop;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblData;
+    public static javax.swing.JLabel lblUsuario;
     // End of variables declaration//GEN-END:variables
 }

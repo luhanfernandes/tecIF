@@ -7,29 +7,44 @@ package br.com.tecif.tela;
 import java.sql.*;
 import br.com.tecif.dal.Conexao;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author Luhan
  */
 public class TelaLogin extends javax.swing.JFrame {
+
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
 
-
-    public void logar(){
-        String sql="select * from tbusuario where login=? and senha =?";
+    public void logar() {
+        String sql = "select * from tbusuario where login=? and senha =?";
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, txtUsuario.getText());
             pst.setString(2, txtSenhaUsuario.getText());
-            
+
             rs = pst.executeQuery();
-            
+
             if (rs.next()) {
-                TelaPrincipal principal = new TelaPrincipal();
-                
-                principal.setVisible(true);
+
+                String perfil = rs.getString(6);
+
+                if (perfil.equals("adm")) {
+
+                    TelaPrincipal principal = new TelaPrincipal();
+                    principal.setVisible(true);
+                    TelaPrincipal.MenuRelatorio.setEnabled(true);
+                    TelaPrincipal.MenuCadastrarUsuario.setEnabled(true);
+                    TelaPrincipal.lblUsuario.setText(rs.getString(2));
+                    this.dispose();
+                } else {
+                    TelaPrincipal principal = new TelaPrincipal();
+                    principal.setVisible(true);
+                    TelaPrincipal.lblUsuario.setText(rs.getString(2));
+                    this.dispose();
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "usuario ou senha invalida!");
             }
@@ -37,6 +52,7 @@ public class TelaLogin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
+
     /**
      * Creates new form TelaLogin
      */
@@ -44,7 +60,7 @@ public class TelaLogin extends javax.swing.JFrame {
         initComponents();
         conexao = Conexao.conector();
         System.out.println(conexao);
-        
+
     }
 
     /**
@@ -61,6 +77,7 @@ public class TelaLogin extends javax.swing.JFrame {
         txtUsuario = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
         txtSenhaUsuario = new javax.swing.JPasswordField();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tec IF (Login)");
@@ -84,32 +101,40 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/tecif/icon/ifpeIcon.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(102, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(btnLogin))
+                    .addComponent(txtSenhaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addComponent(jLabel2)))
+                .addGap(98, 98, 98))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(156, 156, 156)
-                        .addComponent(btnLogin))
+                        .addGap(161, 161, 161)
+                        .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtSenhaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(182, 182, 182)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(177, 177, 177)
-                        .addComponent(jLabel2)))
-                .addContainerGap(100, Short.MAX_VALUE))
+                        .addGap(181, 181, 181)
+                        .addComponent(jLabel1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(68, 68, 68)
+                .addGap(25, 25, 25)
+                .addComponent(jLabel3)
+                .addGap(27, 27, 27)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -174,9 +199,9 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPasswordField txtSenhaUsuario;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
-
 
 }
