@@ -157,12 +157,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblUsuario, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblData, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblData)
+                        .addGap(13, 13, 13)))
                 .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(desktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jLabel1)
@@ -170,15 +174,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addComponent(lblUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblData)
-                .addContainerGap())
+                .addGap(38, 38, 38))
         );
 
-        setSize(new java.awt.Dimension(635, 408));
+        setSize(new java.awt.Dimension(635, 411));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void MenuCadastarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCadastarClienteActionPerformed
         // TODO add your handling code here:
+        TelaCliente cliente = new TelaCliente();
+        cliente.setVisible(true);
+        desktop.add(cliente);
     }//GEN-LAST:event_MenuCadastarClienteActionPerformed
 
     private void MenuAjudaSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuAjudaSobreActionPerformed
