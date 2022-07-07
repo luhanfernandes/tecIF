@@ -14,7 +14,7 @@ import net.proteanit.sql.DbUtils;
  * @author Luhan
  */
 public class TelaCliente extends javax.swing.JInternalFrame {
-    
+
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
@@ -26,10 +26,10 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         initComponents();
         conexao = Conexao.conector();
     }
-    
-    private void adicionar() {
+
+    private void adicionar_cliente() {
         String sql = "insert into tbCliente(nomeCliente,cpfCliente,enderecoCliente,numeroCliente,emailCliente) values(?,?,?,?,?)";
-        
+
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, txtClienteNome.getText());
@@ -37,13 +37,13 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             pst.setString(3, txtClienteEndereco.getText());
             pst.setString(4, txtCliNumero.getText());
             pst.setString(5, txtClienteEmail.getText());
-            
+
             if ((txtClienteNome.getText().isEmpty()) || (txtClienteCPF.getText().isEmpty())
                     || txtClienteEndereco.getText().isEmpty() || txtCliNumero.getText().isEmpty()
                     || txtClienteEmail.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Prencha os campos");
             } else {
-                
+
                 int adicionado = pst.executeUpdate();
                 if (adicionado > 0) {
                     JOptionPane.showMessageDialog(null, "Cliente adicionado");
@@ -58,35 +58,35 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             JOptionPane.showConfirmDialog(null, e);
         }
     }
-    
-    public void pesquisar() {
+
+    public void pesquisar_cliente() {
         String sql = "select idCliente as id, nomeCliente as Nome, enderecoCliente as Endereoço, cpfCliente as CPF, numeroCliente as Numero, emailCliente as Email from tbCliente where nomeCliente like ?";
-        
+
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, txtClientePesquisa.getText() + "%");
             rs = pst.executeQuery();
-            
+
             tblCliente.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
             JOptionPane.showConfirmDialog(null, e);
         }
     }
-    
-    public void setar() {
+
+    public void setar_cliente() {
         int setar = tblCliente.getSelectedRow();
         txtClienteNome.setText(tblCliente.getModel().getValueAt(setar, 1).toString());
-        txtClienteCPF.setText(tblCliente.getModel().getValueAt(setar, 2).toString());
-        txtClienteEndereco.setText(tblCliente.getModel().getValueAt(setar, 3).toString());
+        txtClienteCPF.setText(tblCliente.getModel().getValueAt(setar, 3).toString());
+        txtClienteEndereco.setText(tblCliente.getModel().getValueAt(setar, 2).toString());
         txtCliNumero.setText(tblCliente.getModel().getValueAt(setar, 4).toString());
         txtClienteEmail.setText(tblCliente.getModel().getValueAt(setar, 5).toString());
-        
+
         btnAdicionar.setEnabled(false);
     }
-    
-    public void alterar() {
+
+    private void alterar_cliente() {
         String sql = "update tbCliente set nomeCliente=?,cpfCliente=?,enderecoCliente=?,numeroCliente=?,emailCliente=? where cpfCliente=?";
-        
+
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, txtClienteNome.getText());
@@ -95,13 +95,13 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             pst.setString(4, txtCliNumero.getText());
             pst.setString(5, txtClienteEmail.getText());
             pst.setString(6, txtClienteCPF.getText());
-            
+
             if ((txtClienteNome.getText().isEmpty()) || (txtClienteCPF.getText().isEmpty())
                     || txtClienteEndereco.getText().isEmpty() || txtCliNumero.getText().isEmpty()
                     || txtClienteEmail.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Prencha os campos");
             } else {
-                
+
                 int adicionado = pst.executeUpdate();
                 if (adicionado > 0) {
                     JOptionPane.showMessageDialog(null, "Cliente modificado");
@@ -110,7 +110,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                     txtClienteEndereco.setText(null);
                     txtCliNumero.setText(null);
                     txtClienteEmail.setText(null);
-                    
+
                     btnAdicionar.setEnabled(true);
                 }
             }
@@ -118,32 +118,34 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             JOptionPane.showConfirmDialog(null, e);
         }
     }
-    public void remover(){
+
+    public void remover_cliente() {
         int confirmar = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover o cliente?", "Atenção", JOptionPane.YES_NO_OPTION);
-        
-        if (confirmar == JOptionPane.YES_OPTION){
+
+        if (confirmar == JOptionPane.YES_OPTION) {
             String sql = "delete from tbcliente where cpfCliente=?";
-            
+
             try {
                 pst = conexao.prepareStatement(sql);
                 pst.setString(1, txtClienteCPF.getText());
 
                 int apagar = pst.executeUpdate();
-                if (apagar > 0){
+                System.out.println("br.com.tecif.tela.TelaCliente.remover_cliente()");
+                if (apagar > 0) {
                     JOptionPane.showMessageDialog(null, "Cliente removido");
                     txtClienteNome.setText(null);
                     txtClienteCPF.setText(null);
                     txtClienteEndereco.setText(null);
                     txtCliNumero.setText(null);
                     txtClienteEmail.setText(null);
-                    
+
                     btnAdicionar.setEnabled(true);
                 }
             } catch (Exception e) {
                 JOptionPane.showConfirmDialog(null, e);
             }
         }
-    
+
     }
 
     /**
@@ -332,28 +334,28 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         // TODO add your handling code here:
-        adicionar();
+        adicionar_cliente();
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void txtClientePesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClientePesquisaKeyReleased
         // TODO add your handling code here:
-        pesquisar();
+        pesquisar_cliente();
 
     }//GEN-LAST:event_txtClientePesquisaKeyReleased
 
     private void tblClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClienteMouseClicked
         // TODO add your handling code here:
-        setar();
+        setar_cliente();
     }//GEN-LAST:event_tblClienteMouseClicked
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-        alterar();
+        alterar_cliente();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
         // TODO add your handling code here:
-        remover();
+        remover_cliente();
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void txtClientePesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClientePesquisaActionPerformed
