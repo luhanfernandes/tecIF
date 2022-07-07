@@ -27,6 +27,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="OrdemServi&#xe7;o"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuCadastrarOSActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="MenuCadastrarUsuario">
               <Properties>

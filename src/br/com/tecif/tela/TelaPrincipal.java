@@ -91,6 +91,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         MenuCadastrarOS.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
         MenuCadastrarOS.setText("OrdemServiço");
+        MenuCadastrarOS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuCadastrarOSActionPerformed(evt);
+            }
+        });
         MenuCadastrar.add(MenuCadastrarOS);
 
         MenuCadastrarUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
@@ -219,6 +224,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void MenuOpçõesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuOpçõesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_MenuOpçõesActionPerformed
+
+    private void MenuCadastrarOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCadastrarOSActionPerformed
+        // TODO add your handling code here:
+        TelaOS os = new TelaOS();
+        os.setVisible(true);
+        desktop.add(os);
+    }//GEN-LAST:event_MenuCadastrarOSActionPerformed
 
     /**
      * @param args the command line arguments
